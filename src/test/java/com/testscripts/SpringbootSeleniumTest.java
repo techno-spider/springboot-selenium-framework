@@ -11,8 +11,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import javax.annotation.PostConstruct;
-
 @SpringBootTest(classes = BrowserFactory.class)
 public class SpringbootSeleniumTest extends AbstractTestNGSpringContextTests {
 
@@ -22,8 +20,8 @@ public class SpringbootSeleniumTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private BrowserFactory browserFactory;
 
-    @BeforeClass
     @Parameters("browser")
+    @BeforeClass
     public void setUp(String browser) {
         browserFactory.setDriver(browserFactory.webDriver());
         browserFactory.setBrowser(browser);

@@ -1,12 +1,14 @@
 package com.seleniumspringboot.utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +29,21 @@ public class BrowserFactory {
     }
 
     @Bean
-        public ThreadLocal<WebDriver> webDriver(){
+    public ThreadLocal<WebDriver> webDriver() {
         return new ThreadLocal<>();
+    }
+
+    public WebDriver getDriver() {
+        return tlDriver.get();
     }
 
     public void setDriver(ThreadLocal<WebDriver> driver) {
         tlDriver.set(driver.get());
     }
 
-    public WebDriver getDriver() {
-        return tlDriver.get();
+    public String getBrowserName() {
+        Capabilities caps = ((RemoteWebDriver) tlDriver.get()).getCapabilities();
+        return caps.getBrowserName();
     }
 
     public void setBrowser(String browserName) {

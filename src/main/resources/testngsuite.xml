@@ -1,5 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Spring Selenium Framework Automation Suite">
+    <listeners>
+        <listener
+                class-name="com.seleniumspringboot.listeners.ListenerClass"/>
+    </listeners>
     <parameter name="browser" value="chrome"/>
     <test name="My Test">
         <classes>
