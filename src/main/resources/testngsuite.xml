@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Spring Selenium Framework Automation Suite">
+    <parameter name="browser" value="chrome"/>
+    <test name="My Test">
+        <classes>
+            <class name="com.testscripts.SpringbootSeleniumTest"/>
+        </classes>
+    </test>
+</suite>
