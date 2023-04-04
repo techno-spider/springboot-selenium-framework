@@ -6,6 +6,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.seleniumspringboot.logs.Log;
 import com.seleniumspringboot.reports.Report;
+import com.seleniumspringboot.utils.BrowserFactory;
+import com.seleniumspringboot.utils.Screenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -44,7 +47,15 @@ public class ListenerClass implements ITestListener {
         ITestListener.super.onTestFailure(result);
 
         String testName = result.getName();
-        extentTest.log(Status.INFO, result.getThrowable());
+
+        ThreadLocal<WebDriver> tlDriver = BrowserFactory.webDriver();
+        WebDriver driver = tlDriver.get();
+        String path = Screenshot.takeSnap(driver, testName);
+        Log.info("The screenshot path is: " + path);
+
+        extentTest.addScreenCaptureFromPath(path);
+        extentTest.log(Status.FAIL, "Screenshot below: ");
+        extentTest.log(Status.FAIL, result.getThrowable());
         extentTest.log(Status.FAIL, testName + " has failed.");
         Log.fatal("Test Execution has failed.");
     }

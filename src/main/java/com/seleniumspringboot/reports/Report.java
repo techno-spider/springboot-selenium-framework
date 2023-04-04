@@ -3,9 +3,11 @@ package com.seleniumspringboot.reports;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 
+@Component
 public class Report {
     public static ExtentReports generateExtentReports() {
 

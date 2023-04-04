@@ -29,7 +29,7 @@ public class BrowserFactory {
     }
 
     @Bean
-    public ThreadLocal<WebDriver> webDriver() {
+    public static ThreadLocal<WebDriver> webDriver() {
         return new ThreadLocal<>();
     }
 
